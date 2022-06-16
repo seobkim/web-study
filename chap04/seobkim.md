@@ -39,13 +39,13 @@ Basic 인증에서는 최초 로그인 한 후 HTTP 요청 헤더의 Authorizati
 
 	JWT 토큰은 {header}.{payload}.{signature}로 구성되어 있다.
 
-⁃ Header
+- Header
 ￼<img src="https://user-images.githubusercontent.com/61955818/173989326-55295921-0af1-42f4-8d25-628c1389a7b6.png">
 
 typ : Type을 줄인 말로 토큰의 타입을 의미한다.
 alg : Algorithm을 줄인 말로 토큰의 서명을 발행하는 데 사용된 해시 알고리즘의 종류를 의미한다.
 
-⁃ Payload
+- Payload
 ￼ <img src= "https://user-images.githubusercontent.com/61955818/173989426-795b33ab-cefe-4859-8d2b-ea6da692a7f8.png">
 
 sub : Subject를 줄인 말로 토큰의 주인을 의미한다. 우리의 애플리케이션에서는 사용자의 이메일로 토큰의 주인을 판별한다. sub는 ID처럼 유일한 식별자 (Unique Identifier)여야 한다.
@@ -53,7 +53,7 @@ iss : Issuer를 줄인 말로 토큰을 발행한 주체를 의미한다. 예를
 iat : issued at 을 줄인 말로 토큰이 발행된 날짜와 시간을 의미한다.
 exp : expiration을 줄인 말로 토큰이 만료되는 시간을 의미한다.
 
-⁃ Signature
+- Signature
 토큰을 발행한 주체 Issuer가 발행한 서명으로 토큰의 유효성 검사에 사용된다.
 
 JWT도 토큰 기반 인증이므로 서버가 생성한다. 다른점은 서버가 헤더와 페이로드를 생성한 후 전자 서명을 한다는 점이다.
