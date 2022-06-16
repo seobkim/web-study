@@ -87,3 +87,10 @@ API를 호출할때 마다 사용자를 인증해 주는 부분을 스프링 시
 스프링 시큐리티 프로젝트를 추가하면 스프링 시큐리티가 FilterChainProxy라는 필터를 서블릿 필터에 끼워 넣어준다. 이 FilterChainProxy 클래스 안에서 내부적으로 필터를 실행시키는데 이 필터들이 스프링이 관리하는 스프링 Bean 필터다
 
 스프링이 관리하는 필터라고 크게 다른 것은 없다. 단지 우리가 상속할 필터는 HttpFilter가 아닌 OncePerRequestFilter 라는 점, Web.xml 대신 WebSecurityConfigureAdapter 라는 클래스를 상속해 필터를 설정한다는 점이 다를뿐이다.
+
+HttpSecurity는 시큐리티 설정을 위한 오브젝트
+- 제공되는 빌더를 이용해 cors(교차 출처 리소스 공유 (Cross-origin resource sharing)), csrf(사이트 간 요청 위조 (Cross-site request forgery)),httpBasic,session,authorizeRequests 등 다양한 설정을 할 수 있다.
+- 이 프로젝트에서는 Web.xml 이 아닌 HttpSecurity를 이용해 시큐리티 관련 설정은 한다.
+	
+### 4.3.6 패스워드 암호
+- 패스워드 암호화는 스프링 시큐리티가 제공하는 BCryptPasswordEncoder의 사용
