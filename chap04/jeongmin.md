@@ -103,6 +103,33 @@ payload
 
 ❗어떤식으로 인증을 하고 확인 하는지
 
+❗스케일 이슈 해결
+
+기존엔 클라이언트의 상태를 어디선가 들고있어야 한다는 문제점을 해결하지 못했다.
+
+→ 
+
+- **JSON Web Token (JWT)**은 웹표준 ([RFC 7519](https://tools.ietf.org/html/rfc7519)) 으로서 두 개체에서 JSON 객체를 사용하여 가볍고 자가수용적인 (self-contained) 방식으로 정보를 안전성 있게 전달한다.
+    - 자가 수용적이라는 의미는 JWT 안에 인증에 필요한 모든 정보를 자체적으로 지니고 있다는 의미이다.
+    
+    ** 즉 여러 서버를 사용한다면 토큰 정보를 들고 있어야 하지만, JWT는 자체적으로 정보를 가지고 있어서 좋음
+    
+
+❗왜 굳이 전자서명을 사용하는지
+
+- 인증에 필요한 정보가 토큰에 들어있어서 별도의 저장소가 필요 없다.
+    - 하지만 보안성을 높이기위해 `Refresh Token`을 사용하는경우 별도의 저장소에 저장하면서 사용하는 경우에는 해당하지 않는다.
+- Cookie와 Session 사용시 문제점이였던 stateful 특성을 JWT 사용시 stateless하게 가져갈 수 있다. 즉 서버는 클라이언트의 상태를 가질 필요가 없다.
+
+### JWT 요약
+
+- 클라이언트의 상태를 들고있을 필요 없이 토큰만으로 인증처리가 가능하다. 즉 `stateless`하다.
+- MSA에서 중앙화된 인증방식에 비해 유리하다.
+- 그런데 보안문제로 Refresh Token을 도입하면 결국 이를 저장하기위한 별도의 저장소가 필요한건 마찬가지이다. 즉 stateless 하지 않다.
+- 하지만 세션은 로그인할때마다 저장소에 접근하지만JWT는 토큰이 만료되었을때만 저장소에 접근하기 때문에 접근하는 횟수 자체는 훨씬 적다.
+- access token을 사용하는 기간동안은 stateless하지만, 만료되었을 때는 stateless가 깨지게된다.
+- MSA 환경에서 유용하다.
+
 ## 스프링 시큐리티 통합
 
 스프링 시큐리티를 이용해 코드를 한 번만 짜고, 이 코드가 모든 API를 수행하기 바로 전엔 실행되도록 설정 및 구현 할 수 있다.
@@ -120,3 +147,7 @@ payload
 ![스크린샷 2022-06-13 오후 8.44.40.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4504dab2-ba3c-4f58-974b-e034a6d29042/스크린샷_2022-06-13_오후_8.44.40.png)
 
 [https://www.bottlehs.com/springboot/스프링-부트-spring-security를-활용한-인증-및-권한부여/](https://www.bottlehs.com/springboot/%EC%8A%A4%ED%94%84%EB%A7%81-%EB%B6%80%ED%8A%B8-spring-security%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%9C-%EC%9D%B8%EC%A6%9D-%EB%B0%8F-%EA%B6%8C%ED%95%9C%EB%B6%80%EC%97%AC/)
+
+추가 참고할만한 블로그
+
+[https://velog.io/@znftm97/JWT-Session-Cookie-비교-sphsi9yh](https://velog.io/@znftm97/JWT-Session-Cookie-%EB%B9%84%EA%B5%90-sphsi9yh)
