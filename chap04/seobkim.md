@@ -94,3 +94,6 @@ HttpSecurity는 시큐리티 설정을 위한 오브젝트
 	
 ### 4.3.6 패스워드 암호
 - 패스워드 암호화는 스프링 시큐리티가 제공하는 BCryptPasswordEncoder의 사용
+
+	
+![image](https://user-images.githubusercontent.com/61955818/174045705-ca08baf1-50b8-4557-8495-c623a1e2aa3d.png)
